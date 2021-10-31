@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lianxi1</title>
+</head>
+<body>
+    <script src="js/pixi.min.js"></script>
+    <script>
+		var app = new PIXI.Application(500,350);
+        document.body.appendChild(app.view);
+        
+		var road4 = new PIXI.Sprite.fromImage("res/road4.png");
+		app.stage.addChild(road4);
+		
+		var zebra1 = new PIXI.Sprite.fromImage("res/zebra1.png");
+		app.stage.addChild(zebra1);
+		zebra1.x = -15;
+		zebra1.y = 220;
+		var zebra2 = new PIXI.Sprite.fromImage("res/zebra2.png");
+		app.stage.addChild(zebra2);
+		zebra2.x = 160;
+		zebra2.y = 220;
+		
+		var car2 = new PIXI.Sprite.fromImage("res/car2.png");
+			app.stage.addChild(car2);
+		car2.x = 177;
+		car2.y = 0;
+		
+		var man1 = new PIXI.Sprite.fromImage("res/man1.png");
+		var man2 = new PIXI.Sprite.fromImage("res/man2.png");
+		var man3 = new PIXI.Sprite.fromImage("res/man3.png");
+		app.stage.addChild(man1);
+		app.stage.addChild(man2);
+		man1.y = 250;
+		man2.y = 300;
+		man3.y = 310;
+		
+		app.stage.addChild(man3);
+		var speed = 0;
+		road4.interactive = true;
+		car2.interactive = true;
+		app.ticker.add(animate);
+		
+		
+		var distance = 625;
+		var text1 = new PIXI.Text("GameOver");
+		var text2 = new PIXI.Text("Win");
+		app.stage.addChild(text1);
+		app.stage.addChild(text2);
+		text1.x = 190;
+		text1.y = 200;
+		text2.x = 190;
+		text2.y = 200;
+		text1.visible = false;
+		text2.visible = false;
+		
+		
+		function animate() {
+			var cx1 = car2.x-man1.x;
+			var cy1 = car2.y-man1.y;
+			var cx2 = car2.x-man2.x;
+			var cy2 = car2.y-man2.y;
+			var cx3 = car2.x-man3.x;
+			var cy3 = car2.y-man3.y;
+		    car2.y += speed;
+			man1.x+=1;
+			man2.x+=1.2;
+			man3.x+=0.9;
+			if(man1.x>400)
+			man1.x=-20;
+			if(man2.x>400)
+			man2.x = -20;
+			if(man3.x>400)
+			man3.x = -20;
+			if(cx1*cx1+cy1*cy1<=distance){
+				speed=0;
+				text1.visible = true;
+				}
+			if(cx2*cx2+cy2*cy2<=distance){
+				speed=0;
+				text1.visible = true;
+				}
+			if(cx3*cx3+cy3*cy3<=distance){
+				speed=0;
+				text1.visible = true;
+				}
+			if(car2.y>370)
+			text1.visible = false;
+				text2.visible = true;
+		}
+		road4.on("click",Speed);
+		function Speed(){
+			if(speed==0)
+			speed=2;
+			else if(speed==2)
+			speed=0;
+		}
+		
+			
+    </script>
+</body>
+</html>
